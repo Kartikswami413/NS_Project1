@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classical Cryptography Toolkit | Network Security (ECM 2026-27)</title>
+    <meta name="description" content="A comprehensive interactive Classical Cryptography Toolkit featuring Substitution, Transposition, and Cryptanalysis modules.">
+    
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Core Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/ciphers.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- ================================================================
+             SIDEBAR: MENU-DRIVEN NAVIGATION (PER DOCX SPECIFICATION)
+             ================================================================ -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="brand">
+                    <div class="brand-icon">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <div class="brand-info">
+                        <h1>CRYPTO TOOLKIT</h1>
+                        <span class="tagline">Classical Ciphers</span>
+                    </div>
+                </div>
+                <div class="course-meta">
+                    <span class="course-badge"><i class="fa-solid fa-graduation-cap"></i> Network Security</span>
+                    <span class="class-badge">Final Year ECM</span>
+                </div>
+            </div>
+
+            <!-- Menu items numbered 1-13 as required -->
+            <nav class="nav-menu" id="nav-menu">
+                <div class="menu-category">
+                    <i class="fa-solid fa-cube"></i> Substitution Ciphers
+                </div>
+                <button class="menu-item active" data-cipher="caesar" id="nav-caesar">
+                    <span class="menu-num">01.</span>
+                    <i class="fa-solid fa-rotate menu-icon"></i>
+                    <span>Caesar Cipher</span>
+                </button>
+                <button class="menu-item" data-cipher="mono" id="nav-mono">
+                    <span class="menu-num">02.</span>
+                    <i class="fa-solid fa-arrow-right-arrow-left menu-icon"></i>
+                    <span>Monoalphabetic</span>
+                </button>
+                <button class="menu-item" data-cipher="playfair" id="nav-playfair">
+                    <span class="menu-num">03.</span>
+                    <i class="fa-solid fa-table-cells menu-icon"></i>
+                    <span>Playfair Cipher</span>
+                </button>
+                <button class="menu-item" data-cipher="hill" id="nav-hill">
+                    <span class="menu-num">04.</span>
+                    <i class="fa-solid fa-calculator menu-icon"></i>
+                    <span>Hill Cipher (Matrix)</span>
+                </button>
+                <button class="menu-item" data-cipher="vigenere" id="nav-vigenere">
+                    <span class="menu-num">05.</span>
+                    <i class="fa-solid fa-layer-group menu-icon"></i>
+                    <span>Vigenère Cipher</span>
+                </button>
+                <button class="menu-item" data-cipher="otp" id="nav-otp">
+                    <span class="menu-num">06.</span>
+                    <i class="fa-solid fa-key menu-icon"></i>
+                    <span>One-Time Pad (Vernam)</span>
+                </button>
+
+                <div class="menu-category">
+                    <i class="fa-solid fa-arrows-split-up-and-left"></i> Transposition Ciphers
+                </div>
+                <button class="menu-item" data-cipher="railfence" id="nav-railfence">
+                    <span class="menu-num">07.</span>
+                    <i class="fa-solid fa-wave-square menu-icon"></i>
+                    <span>Rail Fence Cipher</span>
+                </button>
+                <button class="menu-item" data-cipher="columnar" id="nav-columnar">
+                    <span class="menu-num">08.</span>
+                    <i class="fa-solid fa-table-columns menu-icon"></i>
+                    <span>Columnar Transposition</span>
+                </button>
+
+                <div class="menu-category">
+                    <i class="fa-solid fa-screwdriver-wrench"></i> Utility Modules
+                </div>
+                <button class="menu-item" data-cipher="compare" id="nav-compare">
+                    <span class="menu-num">09.</span>
+                    <i class="fa-solid fa-chart-simple menu-icon"></i>
+                    <span>Compare Algorithms</span>
+                </button>
+                <button class="menu-item" data-cipher="file-encrypt" id="nav-file-encrypt">
+                    <span class="menu-num">10.</span>
+                    <i class="fa-solid fa-file-shield menu-icon"></i>
+                    <span>Encrypt Text File</span>
+                </button>
+                <button class="menu-item" data-cipher="file-decrypt" id="nav-file-decrypt">
+                    <span class="menu-num">11.</span>
+                    <i class="fa-solid fa-file-lines menu-icon"></i>
+                    <span>Decrypt Text File</span>
+                </button>
+                <button class="menu-item" data-cipher="help" id="nav-help">
+                    <span class="menu-num">12.</span>
+                    <i class="fa-solid fa-circle-question menu-icon"></i>
+                    <span>Help & Project Report</span>
+                </button>
+                <button class="menu-item" data-cipher="exit" id="nav-exit">
+                    <span class="menu-num">13.</span>
+                    <i class="fa-solid fa-lock menu-icon"></i>
+                    <span>Lock Toolkit / Exit</span>
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="btn btn-secondary btn-sm" id="btn-sample-load" style="flex:1;" title="Load Sample 'NETWORK SECURITY'">
+                    <i class="fa-solid fa-bolt"></i> Sample Test
+                </button>
+                <button class="btn btn-secondary btn-sm" id="btn-quick-report" title="View Report">
+                    <i class="fa-solid fa-file-pdf"></i>
+                </button>
+            </div>
+        </aside>
+
+        <!-- ================================================================
+             MAIN CONTENT
+             ================================================================ -->
+        <main class="main-content">
+            <!-- Topbar Navigation -->
+            <header class="topbar">
+                <div class="topbar-left">
+                    <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Menu">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <div class="current-view-badge">
+                        <h2 id="topbar-title">Caesar Cipher</h2>
+                        <span class="category-tag" id="topbar-category">Substitution</span>
+                    </div>
+                </div>
+
+                <div class="topbar-right">
+                    <button class="btn-icon" id="sound-btn" title="Toggle Sound FX">
+                        <i class="fa-solid fa-volume-high"></i>
+                    </button>
+                    <button class="btn-icon" id="report-modal-btn" title="Project Documentation">
+                        <i class="fa-solid fa-book-open"></i>
+                    </button>
+                    <button class="btn-icon" id="lock-btn" title="Lock Toolkit">
+                        <i class="fa-solid fa-lock"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Dynamic View Container -->
+            <div class="view-container">
+                <!-- Banner Info for Active Cipher -->
+                <div class="view-hero" id="view-hero">
+                    <div class="hero-info">
+                        <h3 id="hero-title"><i class="fa-solid fa-rotate"></i> Caesar Cipher</h3>
+                        <p id="hero-desc">Monoalphabetic shift cipher where each letter is replaced by a letter some fixed number of positions down the alphabet.</p>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat-pill">
+                            <span class="label">Keyspace</span>
+                            <span class="value" id="stat-keyspace">25 keys</span>
+                        </div>
+                        <div class="stat-pill">
+                            <span class="label">Historical Era</span>
+                            <span class="value" id="stat-era">c. 100 BC</span>
+                        </div>
+                        <div class="stat-pill">
+                            <span class="label">Execution Time</span>
+                            <span class="value" id="stat-time">0.00 µs</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MAIN INTERACTIVE STUDIO (CIPHER OPERATIONS) -->
+                <div id="cipher-studio-container" class="crypto-studio">
+                    <!-- LEFT PANE: Inputs & Configuration -->
+                    <div class="studio-pane">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <i class="fa-solid fa-sliders"></i> Configuration & Input
+                                </div>
+                                <div class="card-actions">
+                                    <button class="btn btn-secondary btn-sm" id="btn-clear-input" title="Clear Input">
+                                        <i class="fa-solid fa-eraser"></i> Clear
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Plaintext Input Area -->
+                            <div class="form-group">
+                                <div class="form-label">
+                                    <span>Plaintext / Input Text</span>
+                                    <span class="hint" id="char-count-label">16 characters</span>
+                                </div>
+                                <textarea id="input-text" class="textarea-field mono-input" placeholder="Enter text to encrypt or decrypt...">NETWORK SECURITY</textarea>
+                                <div class="preset-bar">
+                                    <span style="font-size: 11px; color: var(--text-dark); margin-right: 4px;">Samples:</span>
+                                    <span class="preset-chip" data-sample="NETWORK SECURITY">NETWORK SECURITY</span>
+                                    <span class="preset-chip" data-sample="ATTACK AT DAWN">ATTACK AT DAWN</span>
+                                    <span class="preset-chip" data-sample="CLASSICAL CRYPTOGRAPHY">CLASSICAL CRYPTO</span>
+                                </div>
+                            </div>
+
+                            <!-- DYNAMIC KEY CONFIGURATION CONTAINER -->
+                            <div class="form-group" id="cipher-key-container">
+                                <!-- Dynamic Controls will be injected here per cipher -->
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="btn-group" style="margin-top: 24px;">
+                                <button class="btn btn-primary" id="btn-encrypt" style="flex: 1;">
+                                    <i class="fa-solid fa-lock"></i> Encrypt Text
+                                </button>
+                                <button class="btn btn-emerald" id="btn-decrypt" style="flex: 1;">
+                                    <i class="fa-solid fa-lock-open"></i> Decrypt Text
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT PANE: Output & Step-by-Step Visualizer -->
+                    <div class="studio-pane">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <i class="fa-solid fa-terminal"></i> Cryptographic Output
+                                </div>
+                                <div class="card-actions">
+                                    <span class="exec-badge" id="exec-badge">
+                                        <i class="fa-solid fa-stopwatch"></i> <span id="badge-time">0.00 µs</span>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Ciphertext Display -->
+                            <div class="form-group">
+                                <div class="form-label">
+                                    <span>Encrypted Text (Ciphertext)</span>
+                                    <div class="card-actions">
+                                        <button class="btn btn-secondary btn-sm" id="btn-copy-cipher" title="Copy to Clipboard">
+                                            <i class="fa-solid fa-copy"></i> Copy
+                                        </button>
+                                        <button class="btn btn-secondary btn-sm" id="btn-save-cipher" title="Save Encrypted Text to File">
+                                            <i class="fa-solid fa-download"></i> Save File
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="output-box" id="output-cipher">SJYBTWP XJHZWNYD</div>
+                            </div>
+
+                            <!-- Decrypted Roundtrip Display -->
+                            <div class="form-group">
+                                <div class="form-label">
+                                    <span>Decrypted Text (Roundtrip Verification)</span>
+                                    <button class="btn btn-secondary btn-sm" id="btn-copy-plain" title="Copy to Clipboard">
+                                        <i class="fa-solid fa-copy"></i> Copy
+                                    </button>
+                                </div>
+                                <div class="output-box" id="output-decrypted">NETWORK SECURITY</div>
+                            </div>
+
+                            <!-- Dynamic Step-by-Step Visualization Area -->
+                            <div class="form-group" style="margin-top: 24px;">
+                                <div class="viz-tabs">
+                                    <button class="viz-tab active" data-tab="visualizer" id="tab-viz">
+                                        <i class="fa-solid fa-eye"></i> Visualizer
+                                    </button>
+                                    <button class="viz-tab" data-tab="steps" id="tab-steps">
+                                        <i class="fa-solid fa-list-ol"></i> Step Breakdown
+                                    </button>
+                                    <button class="viz-tab" data-tab="frequency" id="tab-freq">
+                                        <i class="fa-solid fa-chart-column"></i> Frequency Analysis
+                                    </button>
+                                </div>
+
+                                <div id="viz-content-container">
+                                    <!-- Dynamic visualizer injected here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ============================================================
+                     UTILITY MODULE 9: COMPARE ALGORITHMS VIEW
+                     ============================================================ -->
+                <div id="module-compare-view" class="card hidden">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <i class="fa-solid fa-chart-simple"></i> Benchmark & Algorithm Comparison Module
+                        </div>
+                        <button class="btn btn-primary btn-sm" id="btn-run-comparison">
+                            <i class="fa-solid fa-play"></i> Re-Run Benchmark
+                        </button>
+                    </div>
+                    <p style="color: var(--text-muted); margin-bottom: 20px;">
+                        This module compares all 8 Classical Encryption Algorithms implemented in this toolkit under identical input conditions, measuring encryption speed in microseconds (µs), evaluating keyspace size, and summarizing vulnerability to cryptanalysis.
+                    </p>
+
+                    <div class="comparison-table-wrap">
+                        <table class="comparison-table" id="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Cipher Name</th>
+                                    <th>Category</th>
+                                    <th>Key Used</th>
+                                    <th>Execution Time</th>
+                                    <th>Security Level</th>
+                                    <th>Primary Cryptanalysis Attack</th>
+                                </tr>
+                            </thead>
+                            <tbody id="comparison-tbody">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- ============================================================
+                     UTILITY MODULES 10 & 11: FILE ENCRYPTION / DECRYPTION VIEW
+                     ============================================================ -->
+                <div id="module-file-view" class="card hidden">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <i class="fa-solid fa-file-shield"></i> <span id="file-module-title">Text File Encryption & Decryption</span>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+                        <div>
+                            <!-- Drag and Drop Zone -->
+                            <div class="form-group">
+                                <label class="form-label">Upload Text File (.txt, .md, .csv)</label>
+                                <div id="drop-zone" style="border: 2px dashed rgba(6, 182, 212, 0.4); border-radius: 14px; padding: 36px 20px; text-align: center; background: rgba(0,0,0,0.3); cursor: pointer; transition: 0.2s;">
+                                    <i class="fa-solid fa-cloud-arrow-up" style="font-size: 38px; color: var(--cyan); margin-bottom: 12px;"></i>
+                                    <h4 style="color:#fff; font-size:15px; margin-bottom: 6px;">Drag & Drop or Click to Browse</h4>
+                                    <p style="color:var(--text-muted); font-size:12px;">Supports plain text files up to 2MB</p>
+                                    <input type="file" id="file-input" accept=".txt,.text,.md,.csv,.log" style="display: none;">
+                                </div>
+                                <div id="file-info-badge" style="margin-top: 10px; display: none;" class="stat-pill">
+                                    <span class="label" id="file-name-label">filename.txt</span>
+                                    <span class="value" id="file-size-label">0 KB</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Select Algorithm for File Operation</label>
+                                <select id="file-cipher-select" class="select-field">
+                                    <option value="caesar">1. Caesar Cipher (Shift 5)</option>
+                                    <option value="mono">2. Monoalphabetic Substitution</option>
+                                    <option value="playfair">3. Playfair Cipher</option>
+                                    <option value="hill">4. Hill Cipher (2x2 Matrix)</option>
+                                    <option value="vigenere" selected>5. Vigenère Cipher</option>
+                                    <option value="otp">6. One-Time Pad</option>
+                                    <option value="railfence">7. Rail Fence (3 Rails)</option>
+                                    <option value="columnar">8. Columnar Transposition</option>
+                                </select>
+                            </div>
+
+                            <div class="btn-group">
+                                <button class="btn btn-primary" id="btn-file-encrypt" style="flex:1;">
+                                    <i class="fa-solid fa-lock"></i> Encrypt File
+                                </button>
+                                <button class="btn btn-emerald" id="btn-file-decrypt" style="flex:1;">
+                                    <i class="fa-solid fa-lock-open"></i> Decrypt File
+                                </button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="form-group">
+                                <div class="form-label">
+                                    <span>Processed File Content Preview</span>
+                                    <button class="btn btn-secondary btn-sm" id="btn-download-file-result">
+                                        <i class="fa-solid fa-download"></i> Download Output
+                                    </button>
+                                </div>
+                                <textarea id="file-preview-output" class="textarea-field mono-input" style="min-height: 280px;" placeholder="File content will appear here after encryption or decryption..." readonly></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ============================================================
+                     UTILITY MODULE 12: HELP, ACADEMY & PROJECT REPORT VIEW
+                     ============================================================ -->
+                <div id="module-help-view" class="card hidden">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <i class="fa-solid fa-graduation-cap"></i> Network Security Academy & Project Report
+                        </div>
+                        <button class="btn btn-emerald btn-sm" id="btn-print-report">
+                            <i class="fa-solid fa-print"></i> Print / Save as PDF
+                        </button>
+                    </div>
+
+                    <div class="viz-tabs">
+                        <button class="viz-tab active" id="tab-report-doc" data-doc="report">
+                            <i class="fa-solid fa-file-contract"></i> Mini Project Report
+                        </button>
+                        <button class="viz-tab" id="tab-report-academy" data-doc="academy">
+                            <i class="fa-solid fa-book"></i> Cipher Theory Encyclopedia
+                        </button>
+                        <button class="viz-tab" id="tab-report-manual" data-doc="manual">
+                            <i class="fa-solid fa-user-gear"></i> User Manual
+                        </button>
+                    </div>
+
+                    <div id="doc-container" style="background: rgba(0,0,0,0.3); border-radius: 14px; padding: 24px; max-height: 700px; overflow-y: auto;">
+                        <!-- Report content injected dynamically -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- ================================================================
+         PASSWORD PROTECTION & LOCK SCREEN MODAL (MODULE 13 & BONUS)
+         ================================================================ -->
+    <div class="modal-overlay hidden" id="lock-screen-overlay">
+        <div class="modal-card">
+            <div style="font-size: 48px; color: var(--cyan); margin-bottom: 16px;">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <h3 style="font-family: var(--font-heading); font-size: 22px; color: #fff; margin-bottom: 8px;">
+                SECURITY ACCESS GATE
+            </h3>
+            <p style="color: var(--text-muted); font-size: 13.5px; margin-bottom: 24px;">
+                Classical Cryptography Toolkit is protected. Please enter the master access passcode to unlock. (Default passcode: <code style="color:var(--cyan);">admin</code>)
+            </p>
+            <form id="lock-form" onsubmit="return false;">
+                <div class="form-group">
+                    <input type="password" id="lock-password-input" class="input-field" placeholder="Enter Master Passcode..." autocomplete="current-password" autofocus>
+                </div>
+                <div class="btn-group" style="justify-content: center;">
+                    <button type="submit" class="btn btn-primary" id="btn-unlock" style="width: 100%;">
+                        <i class="fa-solid fa-unlock"></i> Unlock Toolkit
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div id="toast-container"></div>
+
+    <!-- MAIN APP SCRIPT (ES6 MODULE) -->
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>

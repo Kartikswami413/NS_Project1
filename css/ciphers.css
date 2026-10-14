@@ -1,0 +1,549 @@
+/* ==========================================================================
+   CIPHER VISUALIZERS, MATRICES & CRYPTANALYSIS STYLES
+   ========================================================================== */
+
+/* 1. Caesar Shift Alignment Ribbon */
+.caesar-ribbon {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 16px;
+    overflow-x: auto;
+}
+
+.alphabet-row {
+    display: flex;
+    gap: 4px;
+    min-width: 600px;
+}
+
+.alpha-label {
+    min-width: 60px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-dark);
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+}
+
+.alpha-cell {
+    flex: 1;
+    min-width: 22px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-subtle);
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.alpha-cell.shift-active {
+    background: rgba(6, 182, 212, 0.2);
+    border-color: var(--cyan);
+    color: #fff;
+    font-weight: 700;
+}
+
+/* 2. Monoalphabetic Substitution Map Grid */
+.mono-map-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(46px, 1fr));
+    gap: 6px;
+    max-height: 260px;
+    overflow-y: auto;
+    padding: 4px;
+}
+
+.mono-chip {
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    padding: 6px 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.mono-chip .plain {
+    font-size: 11px;
+    font-family: var(--font-mono);
+    color: var(--text-dark);
+    font-weight: 600;
+}
+
+.mono-chip .arrow {
+    font-size: 9px;
+    color: var(--cyan);
+}
+
+.mono-chip .cipher {
+    font-size: 13px;
+    font-family: var(--font-mono);
+    color: var(--emerald);
+    font-weight: 700;
+}
+
+/* 3. Playfair 5x5 Key Matrix */
+.playfair-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+}
+
+.playfair-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 52px);
+    grid-template-rows: repeat(5, 52px);
+    gap: 8px;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid var(--border-subtle);
+    border-radius: 16px;
+}
+
+.playfair-cell {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-main);
+    transition: all var(--transition-fast);
+}
+
+.playfair-cell.highlight-pair-1 {
+    background: rgba(6, 182, 212, 0.3);
+    border-color: var(--cyan);
+    color: #fff;
+    box-shadow: 0 0 12px rgba(6, 182, 212, 0.5);
+}
+
+.playfair-cell.highlight-pair-2 {
+    background: rgba(139, 92, 246, 0.3);
+    border-color: var(--purple);
+    color: #fff;
+    box-shadow: 0 0 12px rgba(139, 92, 246, 0.5);
+}
+
+.playfair-digraphs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    max-height: 140px;
+    overflow-y: auto;
+    width: 100%;
+}
+
+.digraph-tag {
+    padding: 4px 10px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-subtle);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.digraph-tag .rule-badge {
+    font-size: 10px;
+    color: var(--cyan);
+}
+
+/* 4. Hill Cipher Matrix Inspector */
+.matrix-bracket-wrap {
+    display: inline-flex;
+    position: relative;
+    padding: 6px 14px;
+    margin: 8px 0;
+}
+
+.matrix-bracket-wrap::before, .matrix-bracket-wrap::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 8px;
+    border: 2px solid var(--cyan);
+}
+
+.matrix-bracket-wrap::before {
+    left: 0;
+    border-right: none;
+    border-radius: 6px 0 0 6px;
+}
+
+.matrix-bracket-wrap::after {
+    right: 0;
+    border-left: none;
+    border-radius: 0 6px 6px 0;
+}
+
+.matrix-grid-2x2 {
+    display: grid;
+    grid-template-columns: repeat(2, 60px);
+    gap: 8px;
+}
+
+.matrix-grid-3x3 {
+    display: grid;
+    grid-template-columns: repeat(3, 52px);
+    gap: 6px;
+}
+
+.matrix-cell-input {
+    width: 100%;
+    height: 44px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    text-align: center;
+    color: #fff;
+    font-family: var(--font-mono);
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.matrix-cell-input:focus {
+    border-color: var(--cyan);
+    outline: none;
+}
+
+.hill-math-card {
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 16px;
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+}
+
+.invertible-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status-valid {
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    color: var(--emerald);
+}
+
+.status-invalid {
+    background: rgba(244, 63, 94, 0.15);
+    border: 1px solid rgba(244, 63, 94, 0.4);
+    color: var(--rose);
+}
+
+/* 5. Vigenère Alignment & Tabula Recta */
+.vigenere-stream {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 14px;
+    border-radius: 10px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    overflow-x: auto;
+}
+
+.stream-row {
+    display: flex;
+    gap: 4px;
+}
+
+.stream-row .row-label {
+    width: 50px;
+    color: var(--text-dark);
+    font-size: 11px;
+}
+
+.stream-cell {
+    min-width: 20px;
+    text-align: center;
+}
+
+.tableau-wrapper {
+    max-height: 280px;
+    overflow: auto;
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.tableau-table {
+    border-collapse: collapse;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    width: 100%;
+}
+
+.tableau-table th, .tableau-table td {
+    padding: 4px 6px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.tableau-table th {
+    background: rgba(15, 23, 42, 0.9);
+    color: var(--cyan);
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+.tableau-table th:first-child {
+    left: 0;
+    z-index: 3;
+}
+
+.tableau-table td:first-child {
+    background: rgba(15, 23, 42, 0.9);
+    color: var(--purple);
+    font-weight: 700;
+    position: sticky;
+    left: 0;
+}
+
+/* 6. Rail Fence Zig-Zag Visual Grid */
+.rail-grid-container {
+    background: rgba(0, 0, 0, 0.45);
+    border: 1px solid var(--border-subtle);
+    border-radius: 14px;
+    padding: 16px;
+    overflow-x: auto;
+}
+
+.rail-table {
+    border-collapse: collapse;
+    font-family: var(--font-mono);
+}
+
+.rail-table tr {
+    height: 38px;
+}
+
+.rail-header {
+    width: 70px;
+    font-size: 11px;
+    color: var(--text-dark);
+    text-transform: uppercase;
+    font-weight: 700;
+    border-right: 2px solid rgba(6, 182, 212, 0.3);
+    padding-right: 12px;
+}
+
+.rail-cell {
+    min-width: 32px;
+    height: 34px;
+    text-align: center;
+    vertical-align: middle;
+    padding: 2px;
+}
+
+.rail-char {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(6, 182, 212, 0.2);
+    border: 1px solid var(--cyan);
+    color: #fff;
+    font-weight: 700;
+    font-size: 13px;
+    box-shadow: 0 0 8px rgba(6, 182, 212, 0.4);
+}
+
+.rail-dot {
+    color: rgba(255, 255, 255, 0.1);
+    font-size: 10px;
+}
+
+/* 7. Columnar Transposition Grid */
+.columnar-grid-wrap {
+    overflow-x: auto;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.col-table {
+    border-collapse: collapse;
+    width: 100%;
+    font-family: var(--font-mono);
+}
+
+.col-key-cell {
+    background: rgba(6, 182, 212, 0.15);
+    border: 1px solid rgba(6, 182, 212, 0.3);
+    padding: 8px 12px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--cyan);
+}
+
+.col-rank-cell {
+    background: rgba(139, 92, 246, 0.15);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    padding: 4px 8px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--purple);
+}
+
+.col-data-cell {
+    border: 1px solid var(--border-subtle);
+    padding: 8px 12px;
+    text-align: center;
+    font-size: 14px;
+    color: #fff;
+}
+
+/* 8. Comparison Table */
+.comparison-table-wrap {
+    overflow-x: auto;
+    border-radius: 14px;
+    border: 1px solid var(--border-subtle);
+    background: rgba(11, 17, 32, 0.6);
+}
+
+.comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+.comparison-table th {
+    background: rgba(15, 23, 42, 0.95);
+    padding: 14px 16px;
+    text-align: left;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border-subtle);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+.comparison-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.comparison-table tr:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.security-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.sec-broken {
+    background: rgba(244, 63, 94, 0.15);
+    color: var(--rose);
+    border: 1px solid rgba(244, 63, 94, 0.3);
+}
+
+.sec-moderate {
+    background: rgba(245, 158, 11, 0.15);
+    color: var(--amber);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.sec-perfect {
+    background: rgba(16, 185, 129, 0.15);
+    color: var(--emerald);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    font-weight: 700;
+}
+
+/* 9. Frequency Analysis Bar Chart */
+.freq-chart-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 14px;
+    padding: 18px;
+    border: 1px solid var(--border-subtle);
+}
+
+.freq-bars {
+    display: grid;
+    grid-template-columns: repeat(26, 1fr);
+    gap: 4px;
+    align-items: flex-end;
+    height: 180px;
+    padding-bottom: 24px;
+    position: relative;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.freq-bar-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    justify-content: flex-end;
+    position: relative;
+}
+
+.freq-bar {
+    width: 100%;
+    background: linear-gradient(180deg, var(--cyan) 0%, rgba(6, 182, 212, 0.4) 100%);
+    border-radius: 3px 3px 0 0;
+    min-height: 2px;
+    transition: height 0.3s ease;
+}
+
+.freq-bar.english-ref {
+    width: 4px;
+    background: rgba(255, 255, 255, 0.3);
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border-radius: 2px 2px 0 0;
+}
+
+.freq-label {
+    position: absolute;
+    bottom: -22px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--text-muted);
+}

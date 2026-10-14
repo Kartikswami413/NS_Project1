@@ -1,0 +1,143 @@
+/* ==========================================================================
+   RESPONSIVE DESIGN & PRINT MEDIA STYLES
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+    :root {
+        --sidebar-width: 280px;
+    }
+    
+    .topbar {
+        padding: 0 20px;
+    }
+
+    .view-container {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 860px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+
+    .sidebar.mobile-open {
+        transform: translateX(0);
+        box-shadow: 10px 0 40px rgba(0, 0, 0, 0.8);
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+
+    .mobile-toggle {
+        display: block;
+    }
+
+    .crypto-studio {
+        grid-template-columns: 1fr;
+    }
+
+    .view-hero {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .hero-stats {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 520px) {
+    .topbar-right .btn-icon:not(#lock-btn):not(#sound-btn) {
+        display: none;
+    }
+
+    .current-view-badge h2 {
+        font-size: 16px;
+    }
+
+    .btn-group {
+        flex-direction: column;
+    }
+
+    .btn-group .btn {
+        width: 100%;
+    }
+
+    .playfair-grid {
+        grid-template-columns: repeat(5, 42px);
+        grid-template-rows: repeat(5, 42px);
+        gap: 4px;
+    }
+
+    .playfair-cell {
+        font-size: 15px;
+    }
+}
+
+/* ==========================================================================
+   PRINT MEDIA STYLES (ACADEMIC REPORT / PDF EXPORT)
+   ========================================================================== */
+@media print {
+    body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        background-image: none !important;
+    }
+
+    .sidebar,
+    .topbar,
+    #toast-container,
+    .btn,
+    .btn-group,
+    .preset-bar,
+    .mobile-toggle,
+    .modal-overlay,
+    .viz-tabs {
+        display: none !important;
+    }
+
+    .main-content {
+        margin-left: 0 !important;
+        width: 100% !important;
+    }
+
+    .view-container {
+        padding: 0 !important;
+        max-width: 100% !important;
+    }
+
+    .card {
+        background: #ffffff !important;
+        border: 1px solid #ccc !important;
+        color: #000000 !important;
+        box-shadow: none !important;
+        page-break-inside: avoid;
+    }
+
+    .output-box {
+        background: #f8f9fa !important;
+        color: #000 !important;
+        border: 1px solid #ddd !important;
+    }
+
+    .comparison-table th, .comparison-table td {
+        color: #000 !important;
+        border: 1px solid #ccc !important;
+    }
+
+    .print-only-header {
+        display: block !important;
+        margin-bottom: 30px;
+        text-align: center;
+        border-bottom: 2px solid #000;
+        padding-bottom: 15px;
+    }
+
+    .print-only-header h1 {
+        font-size: 24px;
+        color: #000;
+    }
+}
